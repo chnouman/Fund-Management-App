@@ -17,7 +17,9 @@ import butterknife.ButterKnife;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
+    static int user_num = 1;
 
+    UserDatabase dbh;
     @Bind(R.id.input_email)
     EditText _emailText;
     @Bind(R.id.input_password)
@@ -32,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
+        dbh = new UserDatabase(LoginActivity.this);
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -72,6 +74,24 @@ public class LoginActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
+        userdata ud = dbh.getuser(email);
+        if (ud != null) {
+
+            if (password.equals(ud.get_password())) {
+                Toast t = Toast.makeText(getApplicationContext(), "correct Password", Toast.LENGTH_SHORT);
+                t.show();
+                Intent ic = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(ic);
+            } else {
+                Toast t = Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT);
+                t.show();
+            }
+        }
+
+
+
+
+
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -92,7 +112,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 // TODO: Implement successful signup logic here
                 // By default we just finish the Activity and log them in automatically
+                Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(i);
                 this.finish();
+
             }
         }
     }

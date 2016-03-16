@@ -1,6 +1,7 @@
 package com.example.haresh.dinero;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,6 +17,7 @@ import butterknife.ButterKnife;
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
 
+    UserDatabase dbh ;
     @Bind(R.id.input_name)
     EditText _nameText;
     @Bind(R.id.input_email)
@@ -32,7 +34,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
-
+    dbh= new UserDatabase(SignupActivity.this);
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,13 +72,18 @@ public class SignupActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own signup logic here.
+        userdata ud = new userdata(LoginActivity.user_num,name, email, password);
+
+        dbh.signup(ud);
+        LoginActivity.user_num++;
+        Toast t = Toast.makeText(SignupActivity.this, "Welcome "+name, Toast.LENGTH_SHORT);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onSignupSuccess or onSignupFailed
                         // depending on success
-                        onSignupSuccess();
+                       onSignupSuccess();
                         // onSignupFailed();
                         progressDialog.dismiss();
                     }
