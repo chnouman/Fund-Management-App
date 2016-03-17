@@ -17,10 +17,14 @@ public class UserDatabase extends SQLiteOpenHelper{
             KEY_ID = "id",
             KEY_NAME = "name",
             KEY_EMAIL = "email",
+<<<<<<< HEAD
             KEY_PASSWORD="password"
 
                     ;
 
+=======
+            KEY_PASSWORD="password";
+>>>>>>> mainscreenfixes
 
     public UserDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABSE_VERSION);
@@ -64,8 +68,7 @@ public class UserDatabase extends SQLiteOpenHelper{
         if (cursor != null)
             cursor.moveToFirst();
 
-        userdata ud = new userdata(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
-        return ud;
+        return new userdata(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3));
     }
 
 
@@ -84,7 +87,11 @@ public class UserDatabase extends SQLiteOpenHelper{
         //sortTable();
     }
 
-
-
-
+    public int getUserCount() {
+        String countQuery = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        // return count
+        return cursor.getCount();
+    }
 }

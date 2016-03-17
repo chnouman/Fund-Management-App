@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
+    public static String signupEmail,user;
 
     UserDatabase dbh ;
     @Bind(R.id.input_name)
@@ -61,24 +62,30 @@ public class SignupActivity extends AppCompatActivity {
 
         _signupButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme);
+        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this, R.style.AppTheme);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
         String name = _nameText.getText().toString();
         String email = _emailText.getText().toString();
+        signupEmail=_emailText.getText().toString();
+        user= _nameText.getText().toString();
+
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own signup logic here.
-        userdata ud = new userdata(LoginActivity.user_num,name, email, password);
+        userdata ud = new userdata(dbh.getUserCount()+1, name, email, password);
 
         dbh.signup(ud);
+<<<<<<< HEAD
         LoginActivity.user_num++;
         MainActivity.user_num++;
         CreateFund.user_num++;
         Toast t = Toast.makeText(SignupActivity.this, "Welcome "+name, Toast.LENGTH_SHORT);
+=======
+        Toast.makeText(SignupActivity.this, "Welcome "+name, Toast.LENGTH_SHORT).show();
+>>>>>>> mainscreenfixes
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -131,6 +138,13 @@ public class SignupActivity extends AppCompatActivity {
             valid = false;
         } else {
             _passwordText.setError(null);
+        }
+
+        if (dbh.checkUser(email)){
+            Toast.makeText(SignupActivity.this, "This E-Mail is already in use", Toast.LENGTH_SHORT).show();
+            valid = false;
+            _emailText.setError("Enter another email address");
+            _passwordText.setText("");
         }
 
         return valid;
