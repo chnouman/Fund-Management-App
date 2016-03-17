@@ -64,46 +64,44 @@ public class LoginActivity extends AppCompatActivity {
 
         _loginButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme);
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.AppTheme);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
+        progressDialog.setMessage("Authenticating");
         progressDialog.show();
 
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
-        userdata ud = dbh.getuser(email);
-        if (ud != null) {
-
+        if (dbh.checkUser(email)) {
+            userdata ud = dbh.getuser(email);
             if (password.equals(ud.get_password())) {
-                Toast t = Toast.makeText(getApplicationContext(), "correct Password", Toast.LENGTH_SHORT);
+                Toast t = Toast.makeText(getApplicationContext(), "Correct Password. Logging in.", Toast.LENGTH_SHORT);
                 t.show();
-                Intent ic = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(ic);
-            } else {
-                Toast t = Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT);
-                t.show();
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                new android.os.Handler().postDelayed(
+                        new Runnable() {
+                            public void run() {
+                                // On complete call either onLoginSuccess or onLoginFailed
+                                onLoginSuccess();
+                                // onLoginFailed();
+                                progressDialog.dismiss();
+                            }
+                        }, 3000);
+            }
+            else {
+                progressDialog.dismiss();
+                Toast.makeText(LoginActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+                _loginButton.setEnabled(true);
             }
         }
-
-
-
-
-
-
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
+        else {
+            progressDialog.dismiss();
+            Toast.makeText(LoginActivity.this, "Wrong email address", Toast.LENGTH_SHORT).show();
+            _loginButton.setEnabled(true);
+        }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -133,7 +131,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
         _loginButton.setEnabled(true);
     }
 
@@ -146,14 +143,16 @@ public class LoginActivity extends AppCompatActivity {
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             _emailText.setError("enter a valid email address");
             valid = false;
-        } else {
+        }
+        else {
             _emailText.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
             _passwordText.setError("between 4 and 10 alphanumeric characters");
             valid = false;
-        } else {
+        }
+        else {
             _passwordText.setError(null);
         }
 

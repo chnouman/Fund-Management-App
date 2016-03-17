@@ -42,6 +42,14 @@ public class UserDatabase extends SQLiteOpenHelper{
 
     }
 
+    public Boolean checkUser(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_ID, KEY_NAME, KEY_EMAIL, KEY_PASSWORD}, KEY_EMAIL + " = ?",
+                new String[]{String.valueOf(email)}, null, null, null, null);
+
+        return cursor.getCount() > 0;
+    }
 
     public userdata getuser(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
