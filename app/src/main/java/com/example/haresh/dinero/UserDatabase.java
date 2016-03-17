@@ -17,7 +17,12 @@ public class UserDatabase extends SQLiteOpenHelper{
             KEY_ID = "id",
             KEY_NAME = "name",
             KEY_EMAIL = "email",
-            KEY_PASSWORD="password";
+            KEY_PASSWORD="password",
+            TABLE_FUND="FUNDDB",
+            KEY_ID2="id2",
+            KEY_FUNDNAME ="fund",
+            KEY_TRANS="money"
+                    ;
 
 
     public UserDatabase(Context context) {
@@ -34,8 +39,17 @@ public class UserDatabase extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_EMAIL + " TEXT," + KEY_PASSWORD + " TEXT" + ")");
+
     }
 
+    public Boolean checkUser(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_ID, KEY_NAME, KEY_EMAIL, KEY_PASSWORD}, KEY_EMAIL + " = ?",
+                new String[]{String.valueOf(email)}, null, null, null, null);
+
+        return cursor.getCount() > 0;
+    }
 
     public userdata getuser(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
