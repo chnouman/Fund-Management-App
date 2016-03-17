@@ -77,7 +77,11 @@ public class UserDatabase extends SQLiteOpenHelper{
         //sortTable();
     }
 
-
-
-
+    public int getUserCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        // return count
+        return cursor.getCount();
+    }
 }

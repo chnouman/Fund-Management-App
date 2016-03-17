@@ -61,8 +61,7 @@ public class SignupActivity extends AppCompatActivity {
 
         _signupButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme);
+        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this, R.style.AppTheme);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
@@ -72,11 +71,10 @@ public class SignupActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own signup logic here.
-        userdata ud = new userdata(LoginActivity.user_num,name, email, password);
+        userdata ud = new userdata(dbh.getUserCount()+1, name, email, password);
 
         dbh.signup(ud);
-        LoginActivity.user_num++;
-        Toast t = Toast.makeText(SignupActivity.this, "Welcome "+name, Toast.LENGTH_SHORT);
+        Toast.makeText(SignupActivity.this, "Welcome "+name, Toast.LENGTH_SHORT).show();
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -129,6 +127,13 @@ public class SignupActivity extends AppCompatActivity {
             valid = false;
         } else {
             _passwordText.setError(null);
+        }
+
+        if (dbh.checkUser(email)){
+            Toast.makeText(SignupActivity.this, "This E-Mail is already in use", Toast.LENGTH_SHORT).show();
+            valid = false;
+            _emailText.setError("Enter another email address");
+            _passwordText.setText("");
         }
 
         return valid;
