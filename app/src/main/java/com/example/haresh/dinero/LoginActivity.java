@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
-        if (dbh.checkUser(email)) {
+       // if (dbh.checkUser(email)) {
             userdata ud = dbh.getuser(email);
             if (password.equals(ud.get_password())) {
                 Toast t = Toast.makeText(getApplicationContext(), "Correct Password. Logging in.", Toast.LENGTH_SHORT);
@@ -90,12 +90,12 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }, 3000);
             }
-            else {
-                progressDialog.dismiss();
-                Toast.makeText(LoginActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
-                _loginButton.setEnabled(true);
-            }
-        }
+//            else {
+//                progressDialog.dismiss();
+//                Toast.makeText(LoginActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+//                _loginButton.setEnabled(true);
+//            }
+       // }
         else {
             progressDialog.dismiss();
             Toast.makeText(LoginActivity.this, "Wrong email address", Toast.LENGTH_SHORT).show();
