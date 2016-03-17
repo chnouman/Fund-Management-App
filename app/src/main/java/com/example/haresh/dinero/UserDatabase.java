@@ -17,14 +17,7 @@ public class UserDatabase extends SQLiteOpenHelper{
             KEY_ID = "id",
             KEY_NAME = "name",
             KEY_EMAIL = "email",
-<<<<<<< HEAD
-            KEY_PASSWORD="password"
-
-                    ;
-
-=======
             KEY_PASSWORD="password";
->>>>>>> mainscreenfixes
 
     public UserDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABSE_VERSION);

@@ -16,14 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-<<<<<<< HEAD
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    static int user_num = 1;
-=======
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private final String TAG = "MainActivity";
->>>>>>> mainscreenfixes
+    public static String globalUserName, globalUserEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,37 +36,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (_name != null) {
             _name.setText(LoginActivity.user_name);
+            globalUserName = LoginActivity.user_name;
         }
         if (_email != null) {
             _email.setText(LoginActivity.user_email);
+            globalUserEmail = LoginActivity.user_email;
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-<<<<<<< HEAD
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-                Intent i = new Intent(MainActivity.this,CreateFund.class);
-                startActivity(i);
-                finish();
 
-
-            }
-        });
-=======
         if (fab != null) {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+    //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+    //                        .setAction("Action", null).show();
+                    Intent i = new Intent(MainActivity.this,CreateFund.class);
+                    startActivity(i);
+                    finish();
+
+
                 }
             });
         }
->>>>>>> mainscreenfixes
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

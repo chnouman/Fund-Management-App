@@ -78,14 +78,7 @@ public class SignupActivity extends AppCompatActivity {
         userdata ud = new userdata(dbh.getUserCount()+1, name, email, password);
 
         dbh.signup(ud);
-<<<<<<< HEAD
-        LoginActivity.user_num++;
-        MainActivity.user_num++;
-        CreateFund.user_num++;
-        Toast t = Toast.makeText(SignupActivity.this, "Welcome "+name, Toast.LENGTH_SHORT);
-=======
         Toast.makeText(SignupActivity.this, "Welcome "+name, Toast.LENGTH_SHORT).show();
->>>>>>> mainscreenfixes
 
         new android.os.Handler().postDelayed(
                 new Runnable() {

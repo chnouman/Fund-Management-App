@@ -17,7 +17,6 @@ import butterknife.ButterKnife;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-    static int user_num = 1;
     public static String user_name, user_email;
 
     UserDatabase dbh;
@@ -72,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
-       // if (dbh.checkUser(email)) {
+        if (dbh.checkUser(email)) {
             userdata ud = dbh.getuser(email);
             if (password.equals(ud.get_password())) {
                 user_name= ud.get_name();
@@ -90,12 +89,12 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }, 3000);
             }
-//            else {
-//                progressDialog.dismiss();
-//                Toast.makeText(LoginActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
-//                _loginButton.setEnabled(true);
-//            }
-       // }
+            else {
+                progressDialog.dismiss();
+                Toast.makeText(LoginActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+                _loginButton.setEnabled(true);
+            }
+        }
         else {
             progressDialog.dismiss();
             Toast.makeText(LoginActivity.this, "Wrong email address", Toast.LENGTH_SHORT).show();

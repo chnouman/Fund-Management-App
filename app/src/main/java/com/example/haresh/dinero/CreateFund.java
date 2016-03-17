@@ -11,7 +11,6 @@ import android.widget.EditText;
  * Created by ajayrahul on 17/3/16.
  */
 public class CreateFund extends Activity {
-    static int user_num = 1;
 
     UserDatabase usd;
     FundDatabase fdb;
@@ -42,7 +41,7 @@ public class CreateFund extends Activity {
             public void onClick(View v) {
                 fundname = fname.getText().toString();
                 amnt = amount.getText().toString();
-                userdata ud = usd.getuser(user_num);
+                userdata ud = usd.getuser(MainActivity.globalUserEmail);
 
 
 
