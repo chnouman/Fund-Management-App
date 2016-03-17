@@ -76,6 +76,8 @@ public class SignupActivity extends AppCompatActivity {
 
         dbh.signup(ud);
         LoginActivity.user_num++;
+        MainActivity.user_num++;
+        CreateFund.user_num++;
         Toast t = Toast.makeText(SignupActivity.this, "Welcome "+name, Toast.LENGTH_SHORT);
 
         new android.os.Handler().postDelayed(

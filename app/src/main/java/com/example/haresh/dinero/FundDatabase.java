@@ -50,7 +50,7 @@ public class FundDatabase extends SQLiteOpenHelper{
     }
 
 
-    public void signup (funddata fd) {
+    public void addfund (funddata fd) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
