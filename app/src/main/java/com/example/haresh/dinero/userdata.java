@@ -21,7 +21,6 @@ public class userdata {
         return _name;
     }
 
-
     public int get_id() {
         return _id;
     }
@@ -34,7 +33,6 @@ public class userdata {
         return _password;
     }
 
-
     public void set_name(String _name) {
         this._name = _name;
     }
@@ -46,7 +44,6 @@ public class userdata {
     public void set_password(String _password) {
         this._password = _password;
     }
-
 
     public void set_id(int _id) {
         this._id = _id;

@@ -18,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
     static int user_num = 1;
+    public static String user_name, user_email;
 
     UserDatabase dbh;
     @Bind(R.id.input_email)
@@ -36,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         dbh = new UserDatabase(LoginActivity.this);
         _loginButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 login();
@@ -44,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         _signupLink.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 // Start the Signup activity
@@ -76,8 +75,9 @@ public class LoginActivity extends AppCompatActivity {
         if (dbh.checkUser(email)) {
             userdata ud = dbh.getuser(email);
             if (password.equals(ud.get_password())) {
-                Toast t = Toast.makeText(getApplicationContext(), "Correct Password. Logging in.", Toast.LENGTH_SHORT);
-                t.show();
+                user_name= ud.get_name();
+                user_email= ud.get_email();
+                Toast.makeText(getApplicationContext(), "Correct Password. Logging in.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 new android.os.Handler().postDelayed(
@@ -110,6 +110,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 // TODO: Implement successful signup logic here
                 // By default we just finish the Activity and log them in automatically
+                user_name=SignupActivity.user;
+                user_email=SignupActivity.signupEmail;
                 Intent i = new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(i);
                 this.finish();
