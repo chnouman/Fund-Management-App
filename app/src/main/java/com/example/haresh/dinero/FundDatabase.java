@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class FundDatabase extends SQLiteOpenHelper{
 
     private static final int DATABSE_VERSION = 1;
-    private static final String DATABASE_NAME = "UserDatabase",
+    private static final String DATABASE_NAME = "FundInfoDatabase",
             TABLE_NAME ="FUNDINFO",
             KEY_ID = "id",
             KEY_NAME = "name",
@@ -35,7 +35,7 @@ public class FundDatabase extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTO INCREMENT," + KEY_NAME + " TEXT," + KEY_FUNDNAME + " TEXT," + KEY_TRANS + " INTEGER" +  KEY_DETAILS + " TEXT," + ")");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_FUNDNAME + " TEXT," + KEY_TRANS + " INTEGER," + KEY_DETAILS + " TEXT" + ")");
         
     }
 
@@ -67,7 +67,17 @@ public class FundDatabase extends SQLiteOpenHelper{
         //sortTable();
     }
 
+    public int getsum(String f) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        Cursor cur = db.rawQuery("SELECT SUM(money) FROM FUNDINFO WHERE fund ='"+f+"' ", null);
+        if (cur.moveToFirst()){
+            return cur.getInt(0);
+
+
+        }
+        return 0;
+    }
 
 
 }

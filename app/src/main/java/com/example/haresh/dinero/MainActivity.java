@@ -84,6 +84,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_add_fund) {
             // Handle the camera action
+            Intent i = new Intent(MainActivity.this,CreateFund.class);
+            startActivity(i);
+            finish();
         } else if (id == R.id.nav_change_password) {
 
         } else if (id == R.id.nav_change_picture) {

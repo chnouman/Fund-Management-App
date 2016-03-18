@@ -34,7 +34,7 @@ public class MemberFundDB extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTO INCREMENT," + KEY_NAME + " TEXT," + KEY_FUNDNAME + " TEXT,"  + ")");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT," + KEY_FUNDNAME + " TEXT"  + ")");
         
     }
 

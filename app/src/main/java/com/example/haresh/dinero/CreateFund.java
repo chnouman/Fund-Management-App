@@ -51,9 +51,9 @@ public class CreateFund extends Activity {
                 funddata fd = new funddata(Helpers.user_name,fundname,trans,details);
                 fundlistdata fld = new fundlistdata(fundname);
                 memberfunddata mfd = new memberfunddata(Helpers.user_name,fundname);
+                fndb.addfundname(fld);
 
                 fdb.addfund(fd);
-                fndb.addfundname(fld);
                 mfdb.addinfo(mfd);
 
                 Intent i =new Intent(CreateFund.this,Details.class);
