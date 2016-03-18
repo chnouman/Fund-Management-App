@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private final String TAG = "MainActivity";
 
     SQLiteDatabase db;
-
+    FundNamedb f;
 
     String array[];
 
@@ -37,11 +37,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        f=new FundNamedb(MainActivity.this);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        populateListView();
-        registerClickCallback();
+        if(Helpers.main_visited!=1) {
+            populateListView();
+            registerClickCallback();
+        }
+
         View header=navigationView.getHeaderView(0);
         TextView _name = (TextView) header.findViewById(R.id.nav_name);
         TextView _email = (TextView) header.findViewById(R.id.nav_email);
@@ -120,13 +123,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
     }
+    int count =0;
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            count++;
+            if(count==2){
+                finish();
+            }
+            else{
+                Toast.makeText(MainActivity.this,"Press Once More To Exit",Toast.LENGTH_SHORT);
+            }
         }
     }
 
@@ -157,4 +168,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
 }

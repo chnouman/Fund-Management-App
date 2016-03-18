@@ -75,7 +75,7 @@ public class SignupActivity extends AppCompatActivity {
 
         // TODO: Implement your own signup logic here.
         userdata ud = new userdata(dbh.getUserCount()+1, name, email, password);
-
+        Helpers.main_visited=1;
         dbh.signup(ud);
         Toast.makeText(SignupActivity.this, "Welcome "+name, Toast.LENGTH_SHORT).show();
 

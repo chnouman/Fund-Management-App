@@ -5,4 +5,5 @@ package com.example.haresh.dinero;
  */
 public class Helpers {
     public static String user_name, user_email;
+    public static int main_visited=0;
 }

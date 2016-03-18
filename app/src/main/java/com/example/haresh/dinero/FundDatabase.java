@@ -69,14 +69,14 @@ public class FundDatabase extends SQLiteOpenHelper{
 
     public int getsum(String f) {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor cur = db.rawQuery("SELECT SUM(money) FROM FUNDINFO WHERE fund ='"+f+"' ", null);
+        Cursor cur =null;
+         cur = db.rawQuery("SELECT SUM(money) FROM FUNDINFO WHERE fund ='"+f+"' ", null);
         if (cur.moveToFirst()){
             return cur.getInt(0);
 
 
         }
-        return 0;
+        else return 0;
     }
 
 

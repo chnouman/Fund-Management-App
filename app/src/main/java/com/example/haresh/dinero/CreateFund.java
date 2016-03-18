@@ -60,6 +60,7 @@ public class CreateFund extends Activity {
                 i.putExtra("fund_name",fundname);
                 i.putExtra("type","c");
                 startActivity(i);
+                finish();
 
 
 
