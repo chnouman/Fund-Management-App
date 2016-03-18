@@ -41,11 +41,7 @@ public class CreateFund extends Activity {
             public void onClick(View v) {
                 fundname = fname.getText().toString();
                 amnt = amount.getText().toString();
-                userdata ud = usd.getuser(MainActivity.globalUserEmail);
-
-
-
-
+                userdata ud = usd.getuser(Helpers.user_email);
             }
         });
 

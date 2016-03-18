@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private final String TAG = "MainActivity";
-    public static String globalUserName, globalUserEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +34,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView _email = (TextView) header.findViewById(R.id.nav_email);
 
         if (_name != null) {
-            _name.setText(LoginActivity.user_name);
-            globalUserName = LoginActivity.user_name;
+            _name.setText(Helpers.user_name);
         }
         if (_email != null) {
-            _email.setText(LoginActivity.user_email);
-            globalUserEmail = LoginActivity.user_email;
+            _email.setText(Helpers.user_email);
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
