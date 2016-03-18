@@ -10,8 +10,8 @@ public class funddata {
 
 
 
-    public funddata(int id, String name, String fundname, int trans,String details) {
-        _id = id;
+    public funddata( String name, String fundname, int trans,String details) {
+//        _id = id;
         _name = name;
        _fundname=fundname;
         _trans=trans;

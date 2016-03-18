@@ -25,7 +25,13 @@
 
         </activity>
         <activity android:name="com.example.haresh.dinero.LoginActivity"  />
+        <activity android:name="com.example.haresh.dinero.CreateFund"  />
+
+        <activity android:name="com.example.haresh.dinero.Details"  />
+        <activity android:name="com.example.haresh.dinero.Transaction"  />
+
         <activity android:name="com.example.haresh.dinero.SignupActivity" />
+        <activity android:name="com.example.haresh.dinero.ListUser" />
         <activity android:name="com.example.haresh.dinero.MainScreen" />
     </application>
 

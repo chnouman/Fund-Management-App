@@ -33,7 +33,7 @@ public class FundNamedb extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY,"  + KEY_FUNDNAME + " TEXT," + ")");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"  + KEY_FUNDNAME + " TEXT" + ")");
         
     }
 
@@ -43,7 +43,7 @@ public class FundNamedb extends SQLiteOpenHelper{
         Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_ID,  KEY_FUNDNAME}, KEY_FUNDNAME + "=?", new String[]{name}, null, null , null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        fundlistdata fld = new fundlistdata(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
+        fundlistdata fld = new fundlistdata( cursor.getString(1));
         return fld;
     }
 
@@ -52,7 +52,7 @@ public class FundNamedb extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID,fld.get_id());
+//        values.put(KEY_ID,fld.get_id());
         values.put(KEY_FUNDNAME, fld.get_fundname());
 
 

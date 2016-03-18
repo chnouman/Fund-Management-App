@@ -16,7 +16,6 @@ import butterknife.ButterKnife;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
-    public static String signupEmail,user;
 
     UserDatabase dbh ;
     @Bind(R.id.input_name)
@@ -69,14 +68,14 @@ public class SignupActivity extends AppCompatActivity {
 
         String name = _nameText.getText().toString();
         String email = _emailText.getText().toString();
-        signupEmail=_emailText.getText().toString();
-        user= _nameText.getText().toString();
+        Helpers.user_email=_emailText.getText().toString();
+        Helpers.user_name= _nameText.getText().toString();
 
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own signup logic here.
         userdata ud = new userdata(dbh.getUserCount()+1, name, email, password);
-
+        Helpers.main_visited=1;
         dbh.signup(ud);
         Toast.makeText(SignupActivity.this, "Welcome "+name, Toast.LENGTH_SHORT).show();
 
