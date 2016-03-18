@@ -58,6 +58,7 @@ public class CreateFund extends Activity {
 
                 Intent i =new Intent(CreateFund.this,Details.class);
                 i.putExtra("fund_name",fundname);
+                i.putExtra("type","c");
                 startActivity(i);
 
 
