@@ -48,7 +48,7 @@
         </ScrollView>
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_login"
+            android:id="@+id/add"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
@@ -74,7 +74,7 @@
 
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_login"
+            android:id="@+id/make"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"

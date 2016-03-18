@@ -35,7 +35,7 @@ public class FundDatabase extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_FUNDNAME + " TEXT," + KEY_TRANS + " INTEGER" +  KEY_DETAILS + " TEXT," + ")");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTO INCREMENT," + KEY_NAME + " TEXT," + KEY_FUNDNAME + " TEXT," + KEY_TRANS + " INTEGER" +  KEY_DETAILS + " TEXT," + ")");
         
     }
 
@@ -45,7 +45,7 @@ public class FundDatabase extends SQLiteOpenHelper{
         Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_ID, KEY_NAME, KEY_FUNDNAME, KEY_TRANS}, KEY_NAME + "=?", new String[]{name}, null, null , null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        funddata fd = new funddata(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), Integer.parseInt(cursor.getString(3)),cursor.getString(4));
+        funddata fd = new funddata( cursor.getString(1), cursor.getString(2), Integer.parseInt(cursor.getString(3)),cursor.getString(4));
         return fd;
     }
 
@@ -54,7 +54,7 @@ public class FundDatabase extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID,fd.get_id());
+//        values.put(KEY_ID,fd.get_id());
         values.put(KEY_NAME, fd.get_name()); // Contact name
         values.put(KEY_FUNDNAME, fd.get_fundname()); //
         values.put(KEY_TRANS, fd.get_trans()); //

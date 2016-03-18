@@ -34,7 +34,7 @@ public class MemberFundDB extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_FUNDNAME + " TEXT,"  + ")");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTO INCREMENT," + KEY_NAME + " TEXT," + KEY_FUNDNAME + " TEXT,"  + ")");
         
     }
 
@@ -43,7 +43,7 @@ public class MemberFundDB extends SQLiteOpenHelper{
         Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_ID, KEY_NAME, KEY_FUNDNAME}, KEY_NAME + "=?", new String[]{name}, null, null , null);
         if (cursor != null)
             cursor.moveToFirst();
-        memberfunddata mfd = new memberfunddata(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2));
+        memberfunddata mfd = new memberfunddata(cursor.getString(1),cursor.getString(2));
         return mfd;
     }
 
@@ -52,7 +52,7 @@ public class MemberFundDB extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID,mfd.get_id());
+//        values.put(KEY_ID,mfd.get_id());
         values.put(KEY_NAME, mfd.get_name()); // Contact name
         values.put(KEY_FUNDNAME, mfd.get_fundname()); //
 
